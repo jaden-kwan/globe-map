@@ -22,6 +22,34 @@
     </div>
 </body>
 <script>
-
+  const key = 'no peeking teehehee';
+  const viewer = new Cesium.Viewer('cesiumContainer', {
+    animation: false,
+    baseLayerPicker: false,
+    navigationHelpButton: false,
+    sceneModePicker: false,
+    homeButton: false,
+    geocoder: false,
+    fullscreenButton: false,
+    timeline: false,
+    terrain: new Cesium.Terrain(Cesium.CesiumTerrainProvider.fromUrl(`https://api.maptiler.com/tiles/terrain-quantized-mesh-v2/?key=${key}`, {
+      credit: new Cesium.Credit("\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy;MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e", true),
+      requestVertexNormals: true
+    }))
+    baseLayer: new Cesium.ImageryLayer( new Cesium.UrlTemplateImageryProvider({
+      url: `https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=${key}`,
+      minimumLevel: 0,
+      maximumLevel: 20,
+      tileWidth: 512,
+      tileHeight: 512,
+      credit: new Cesium.Credit("\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e", true)
+    })),
+  });
+  viewer.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(8.67, 46.72, 4500),
+    orientation: {
+      pitch: Cesium.Math.toRadians(-20)
+    }
+  });
 </script>
 </html>
